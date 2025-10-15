@@ -1,0 +1,2211 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "苍穹外卖-后端接口",
+    "description": "苍穹外卖系统用户端接口文档",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "C端-分类接口"
+    },
+    {
+      "name": "C端-地址簿接口"
+    },
+    {
+      "name": "C端-套餐浏览接口"
+    },
+    {
+      "name": "C端-店铺操作接口"
+    },
+    {
+      "name": "C端-用户接口"
+    },
+    {
+      "name": "C端-菜品浏览接口"
+    },
+    {
+      "name": "C端-订单接口"
+    },
+    {
+      "name": "C端-购物车接口"
+    }
+  ],
+  "paths": {
+    "/user/category/list": {
+      "get": {
+        "summary": "条件查询",
+        "deprecated": false,
+        "description": "分类类型查询",
+        "tags": [
+          "C端-分类接口"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "分类类型：1 菜品分类 2 套餐分类",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "createTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "createUser": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "sort": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "status": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "type": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "updateTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "updateUser": {
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/addressBook": {
+      "post": {
+        "summary": "新增地址",
+        "deprecated": false,
+        "description": "添加新地址",
+        "tags": [
+          "C端-地址簿接口"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cityCode": {
+                    "type": "string"
+                  },
+                  "cityName": {
+                    "type": "string"
+                  },
+                  "consignee": {
+                    "type": "string"
+                  },
+                  "detail": {
+                    "type": "string",
+                    "description": "详细地址"
+                  },
+                  "districtCode": {
+                    "type": "string"
+                  },
+                  "districtName": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "isDefault": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "手机号"
+                  },
+                  "provinceCode": {
+                    "type": "string"
+                  },
+                  "provinceName": {
+                    "type": "string"
+                  },
+                  "sex": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "required": [
+                  "phone",
+                  "detail",
+                  "sex"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "根据id修改地址",
+        "deprecated": false,
+        "description": "修改地址信息",
+        "tags": [
+          "C端-地址簿接口"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cityCode": {
+                    "type": "string"
+                  },
+                  "cityName": {
+                    "type": "string"
+                  },
+                  "consignee": {
+                    "type": "string"
+                  },
+                  "detail": {
+                    "type": "string",
+                    "description": "详细地址"
+                  },
+                  "districtCode": {
+                    "type": "string"
+                  },
+                  "districtName": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "主键值"
+                  },
+                  "isDefault": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "手机号"
+                  },
+                  "provinceCode": {
+                    "type": "string"
+                  },
+                  "provinceName": {
+                    "type": "string"
+                  },
+                  "sex": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "required": [
+                  "id",
+                  "phone",
+                  "detail",
+                  "sex"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "根据id删除地址",
+        "deprecated": false,
+        "description": "删除地址",
+        "tags": [
+          "C端-地址簿接口"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "地址id",
+            "required": true,
+            "example": "101",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/addressBook/list": {
+      "get": {
+        "summary": "查询当前登录用户的所有地址信息",
+        "deprecated": false,
+        "description": "获取地址列表",
+        "tags": [
+          "C端-地址簿接口"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "userId": {
+                          "type": "number"
+                        },
+                        "consignee": {
+                          "type": "string"
+                        },
+                        "phone": {
+                          "type": "string"
+                        },
+                        "sex": {
+                          "type": "string"
+                        },
+                        "provinceCode": {
+                          "type": "string"
+                        },
+                        "provinceName": {
+                          "type": "string"
+                        },
+                        "cityCode": {
+                          "type": "string"
+                        },
+                        "cityName": {
+                          "type": "string"
+                        },
+                        "districtCode": {
+                          "type": "string"
+                        },
+                        "districtName": {
+                          "type": "string"
+                        },
+                        "detail": {
+                          "type": "string"
+                        },
+                        "label": {
+                          "type": "string"
+                        },
+                        "isDefault": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "phone",
+                        "consignee",
+                        "userId",
+                        "cityCode",
+                        "provinceName",
+                        "provinceCode",
+                        "sex",
+                        "districtName",
+                        "districtCode",
+                        "cityName",
+                        "isDefault",
+                        "label",
+                        "detail"
+                      ]
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/addressBook/default": {
+      "get": {
+        "summary": "查询默认地址",
+        "deprecated": false,
+        "description": "获取默认地址",
+        "tags": [
+          "C端-地址簿接口"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "cityCode": {
+                          "type": "string"
+                        },
+                        "cityName": {
+                          "type": "string"
+                        },
+                        "consignee": {
+                          "type": "string"
+                        },
+                        "detail": {
+                          "type": "string"
+                        },
+                        "districtCode": {
+                          "type": "string"
+                        },
+                        "districtName": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "isDefault": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "label": {
+                          "type": "string"
+                        },
+                        "phone": {
+                          "type": "string"
+                        },
+                        "provinceCode": {
+                          "type": "string"
+                        },
+                        "provinceName": {
+                          "type": "string"
+                        },
+                        "sex": {
+                          "type": "string"
+                        },
+                        "userId": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "设置默认地址",
+        "deprecated": false,
+        "description": "设置默认地址",
+        "tags": [
+          "C端-地址簿接口"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "地址id"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/addressBook/{id}": {
+      "get": {
+        "summary": "根据id查询地址",
+        "deprecated": false,
+        "description": "获取地址详情",
+        "tags": [
+          "C端-地址簿接口"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "地址id",
+            "required": true,
+            "example": "101",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "phone": {
+                          "type": "string"
+                        },
+                        "consignee": {
+                          "type": "string"
+                        },
+                        "userId": {
+                          "type": "number"
+                        },
+                        "cityCode": {
+                          "type": "string"
+                        },
+                        "provinceName": {
+                          "type": "string"
+                        },
+                        "provinceCode": {
+                          "type": "string"
+                        },
+                        "sex": {
+                          "type": "string"
+                        },
+                        "districtName": {
+                          "type": "string"
+                        },
+                        "districtCode": {
+                          "type": "string"
+                        },
+                        "cityName": {
+                          "type": "string"
+                        },
+                        "isDefault": {
+                          "type": "number"
+                        },
+                        "label": {
+                          "type": "string"
+                        },
+                        "detail": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/setmeal/list": {
+      "get": {
+        "summary": "根据分类id查询套餐",
+        "deprecated": false,
+        "description": "获取套餐列表",
+        "tags": [
+          "C端-套餐浏览接口"
+        ],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "分类id",
+            "required": true,
+            "example": "101",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "categoryId": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "createTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "createUser": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "image": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "status": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "updateTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "updateUser": {
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/setmeal/dish/{id}": {
+      "get": {
+        "summary": "根据套餐id查询包含的菜品",
+        "deprecated": false,
+        "description": "获取套餐菜品详情",
+        "tags": [
+          "C端-套餐浏览接口"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "套餐id",
+            "required": true,
+            "example": "101",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "copies": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "份数"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "菜品描述"
+                          },
+                          "image": {
+                            "type": "string",
+                            "description": "菜品图片路径"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "菜品名称"
+                          }
+                        },
+                        "required": [
+                          "copies",
+                          "description",
+                          "image",
+                          "name"
+                        ]
+                      }
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/shop/status": {
+      "get": {
+        "summary": "获取营业状态",
+        "deprecated": false,
+        "description": "获取店铺营业状态",
+        "tags": [
+          "C端-店铺操作接口"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "店铺状态：1为营业，0为打烊"
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/user/login": {
+      "post": {
+        "summary": "登录",
+        "deprecated": false,
+        "description": "用户登录",
+        "tags": [
+          "C端-用户接口"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "微信授权码"
+                  }
+                },
+                "required": [
+                  "code"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "用户id"
+                        },
+                        "openid": {
+                          "type": "string",
+                          "description": "微信用户openid"
+                        },
+                        "token": {
+                          "type": "string",
+                          "description": "jwt令牌"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "openid",
+                        "token"
+                      ]
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/user/logout": {
+      "post": {
+        "summary": "退出",
+        "deprecated": false,
+        "description": "用户退出登录",
+        "tags": [
+          "C端-用户接口"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/dish/list": {
+      "get": {
+        "summary": "根据分类id查询菜品",
+        "deprecated": false,
+        "description": "获取菜品列表",
+        "tags": [
+          "C端-菜品浏览接口"
+        ],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "分类id",
+            "required": true,
+            "example": "101",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "categoryId": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "categoryName": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "flavors": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "dishId": {
+                                  "type": "integer",
+                                  "format": "int64"
+                                },
+                                "id": {
+                                  "type": "integer",
+                                  "format": "int64"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "description": "菜品口味"
+                          },
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "image": {
+                            "type": "string",
+                            "description": "菜品图片路径"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "菜品名称"
+                          },
+                          "price": {
+                            "type": "number",
+                            "description": "价格"
+                          },
+                          "status": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "updateTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/order/reminder/{id}": {
+      "get": {
+        "summary": "催单",
+        "deprecated": false,
+        "description": "订单催单",
+        "tags": [
+          "C端-订单接口"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "订单id",
+            "required": true,
+            "example": "101",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/order/repetition/{id}": {
+      "post": {
+        "summary": "再来一单",
+        "deprecated": false,
+        "description": "重复下单",
+        "tags": [
+          "C端-订单接口"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "订单id",
+            "required": true,
+            "example": "101",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/order/historyOrders": {
+      "get": {
+        "summary": "历史订单查询",
+        "deprecated": false,
+        "description": "查询历史订单",
+        "tags": [
+          "C端-订单接口"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页面",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页记录数",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "订单状态",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "msg": {
+                      "type": "null"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "number"
+                        },
+                        "records": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "number": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "number"
+                              },
+                              "userId": {
+                                "type": "number"
+                              },
+                              "addressBookId": {
+                                "type": "number"
+                              },
+                              "orderTime": {
+                                "type": "string"
+                              },
+                              "checkoutTime": {
+                                "type": "string"
+                              },
+                              "payMethod": {
+                                "type": "number"
+                              },
+                              "payStatus": {
+                                "type": "number"
+                              },
+                              "amount": {
+                                "type": "number"
+                              },
+                              "remark": {
+                                "type": "string"
+                              },
+                              "userName": {
+                                "type": "null"
+                              },
+                              "phone": {
+                                "type": "string"
+                              },
+                              "address": {
+                                "type": "string"
+                              },
+                              "consignee": {
+                                "type": "string"
+                              },
+                              "cancelReason": {
+                                "type": "null"
+                              },
+                              "rejectionReason": {
+                                "type": "null"
+                              },
+                              "cancelTime": {
+                                "type": "null"
+                              },
+                              "estimatedDeliveryTime": {
+                                "type": "string"
+                              },
+                              "deliveryStatus": {
+                                "type": "number"
+                              },
+                              "deliveryTime": {
+                                "type": "null"
+                              },
+                              "packAmount": {
+                                "type": "number"
+                              },
+                              "tablewareNumber": {
+                                "type": "number"
+                              },
+                              "tablewareStatus": {
+                                "type": "number"
+                              },
+                              "orderDetailList": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "number"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "orderId": {
+                                      "type": "number"
+                                    },
+                                    "dishId": {
+                                      "type": "number"
+                                    },
+                                    "setmealId": {
+                                      "type": "null"
+                                    },
+                                    "dishFlavor": {
+                                      "type": "null",
+                                      "nullable": true
+                                    },
+                                    "number": {
+                                      "type": "number"
+                                    },
+                                    "amount": {
+                                      "type": "number"
+                                    },
+                                    "image": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "name",
+                                    "orderId",
+                                    "dishId",
+                                    "setmealId",
+                                    "dishFlavor",
+                                    "number",
+                                    "amount",
+                                    "image"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/order/cancel/{id}": {
+      "put": {
+        "summary": "取消订单",
+        "deprecated": false,
+        "description": "取消订单",
+        "tags": [
+          "C端-订单接口"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "订单id",
+            "required": true,
+            "example": "101",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/order/orderDetail/{id}": {
+      "get": {
+        "summary": "查询订单详情",
+        "deprecated": false,
+        "description": "获取订单详情",
+        "tags": [
+          "C端-订单接口"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "订单id",
+            "required": true,
+            "example": "101",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "addressBookId": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "amount": {
+                          "type": "number"
+                        },
+                        "cancelReason": {
+                          "type": "string"
+                        },
+                        "cancelTime": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "checkoutTime": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "consignee": {
+                          "type": "string"
+                        },
+                        "deliveryStatus": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "deliveryTime": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "estimatedDeliveryTime": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "id": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "number": {
+                          "type": "string"
+                        },
+                        "orderDetailList": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "amount": {
+                                "type": "number"
+                              },
+                              "dishFlavor": {
+                                "type": "string"
+                              },
+                              "dishId": {
+                                "type": "integer",
+                                "format": "int64"
+                              },
+                              "id": {
+                                "type": "integer",
+                                "format": "int64"
+                              },
+                              "image": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "number": {
+                                "type": "integer",
+                                "format": "int32"
+                              },
+                              "orderId": {
+                                "type": "integer",
+                                "format": "int64"
+                              },
+                              "setmealId": {
+                                "type": "integer",
+                                "format": "int64"
+                              }
+                            }
+                          }
+                        },
+                        "orderTime": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "packAmount": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "payMethod": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "payStatus": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "phone": {
+                          "type": "string"
+                        },
+                        "rejectionReason": {
+                          "type": "string"
+                        },
+                        "remark": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "tablewareNumber": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "tablewareStatus": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "userId": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "userName": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/order/submit": {
+      "post": {
+        "summary": "用户下单",
+        "deprecated": false,
+        "description": "提交订单",
+        "tags": [
+          "C端-订单接口"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "addressBookId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "地址簿id"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "description": "总金额"
+                  },
+                  "deliveryStatus": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "配送状态：  1立即送出  0选择具体时间"
+                  },
+                  "estimatedDeliveryTime": {
+                    "type": "string",
+                    "description": "预计送达时间",
+                    "example": "yyyy-MM-dd HH:mm:ss"
+                  },
+                  "packAmount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "打包费"
+                  },
+                  "payMethod": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "付款方式"
+                  },
+                  "remark": {
+                    "type": "string",
+                    "description": "备注"
+                  },
+                  "tablewareNumber": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "餐具数量"
+                  },
+                  "tablewareStatus": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "餐具数量状态  1按餐量提供  0选择具体数量"
+                  }
+                },
+                "required": [
+                  "addressBookId",
+                  "amount",
+                  "deliveryStatus",
+                  "estimatedDeliveryTime",
+                  "packAmount",
+                  "payMethod",
+                  "remark",
+                  "tablewareNumber",
+                  "tablewareStatus"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "订单id"
+                        },
+                        "orderAmount": {
+                          "type": "number",
+                          "description": "订单金额"
+                        },
+                        "orderNumber": {
+                          "type": "string",
+                          "description": "订单号"
+                        },
+                        "orderTime": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "下单时间"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "orderAmount",
+                        "orderNumber",
+                        "orderTime"
+                      ]
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/order/payment": {
+      "put": {
+        "summary": "订单支付",
+        "deprecated": false,
+        "description": "支付订单",
+        "tags": [
+          "C端-订单接口"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "orderNumber": {
+                    "type": "string",
+                    "description": "订单号"
+                  },
+                  "payMethod": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "支付方式"
+                  }
+                },
+                "required": [
+                  "orderNumber",
+                  "payMethod"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "nonceStr": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "随机字符串"
+                        },
+                        "paySign": {
+                          "type": "string",
+                          "description": "签名"
+                        },
+                        "timeStamp": {
+                          "type": "string",
+                          "description": "时间戳"
+                        },
+                        "signType": {
+                          "type": "string",
+                          "description": "签名算法"
+                        },
+                        "packageStr": {
+                          "type": "string",
+                          "description": "统一下单接口返回的 prepay_id 参数值"
+                        }
+                      },
+                      "required": [
+                        "nonceStr",
+                        "packageStr",
+                        "signType",
+                        "timeStamp",
+                        "paySign"
+                      ]
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/shoppingCart/add": {
+      "post": {
+        "summary": "添加购物车",
+        "deprecated": false,
+        "description": "添加商品到购物车",
+        "tags": [
+          "C端-购物车接口"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dishFlavor": {
+                    "type": "string",
+                    "description": "口味"
+                  },
+                  "dishId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "菜品id"
+                  },
+                  "setmealId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "套餐id"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/shoppingCart/sub": {
+      "post": {
+        "summary": "删除购物车中一个商品",
+        "deprecated": false,
+        "description": "从购物车删除商品",
+        "tags": [
+          "C端-购物车接口"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dishFlavor": {
+                    "type": "string",
+                    "description": "口味"
+                  },
+                  "dishId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "菜品id"
+                  },
+                  "setmealId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "套餐id"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/shoppingCart/list": {
+      "get": {
+        "summary": "查看购物车",
+        "deprecated": false,
+        "description": "获取购物车列表",
+        "tags": [
+          "C端-购物车接口"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "amount": {
+                            "type": "number"
+                          },
+                          "createTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "dishFlavor": {
+                            "type": "string"
+                          },
+                          "dishId": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "image": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "number": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "setmealId": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "userId": {
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/shoppingCart/clean": {
+      "delete": {
+        "summary": "清空购物车",
+        "deprecated": false,
+        "description": "清空购物车",
+        "tags": [
+          "C端-购物车接口"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {}
+  },
+  "servers": [],
+  "security": []
+}
